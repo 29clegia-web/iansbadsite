@@ -1,0 +1,41 @@
+#nav {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 70px;
+background-color: black;
+display: flex;
+flex-direction: inline;
+}
+#left {
+    left: 0;
+}
+#title {
+    color: white;
+    font-family: "Inter";
+    padding-inline: 20px;
+    font-size: clamp(20px,3vw,30px);
+    top: 0;
+}
+#right {
+    position: absolute;
+    height: 70px;
+    right: 0;
+}
+#right > button {
+text-align: center;
+padding-inline: clamp(15px,2vw,20px);
+color: white;
+font-size: clamp(10px,2vw,25px);
+height: 100%;
+background-color: transparent;
+border: none;
+font-family: "Inter";
+transition: 0.3s ease;
+}
+#right > button:hover {
+cursor: pointer;
+background-color: rgb(48, 48, 48);
+transition: 0.3s ease;
+}
