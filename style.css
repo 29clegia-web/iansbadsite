@@ -10,6 +10,8 @@ body {
         rgb(224, 224, 224) 50px,
         rgb(224, 224, 224) 100px
     );
+    user-select: none;
+    overflow: hidden;
 }
 #nav {
     position: fixed;
@@ -43,7 +45,7 @@ body {
 }
 #right > a > button {
     text-align: center;
-    padding-inline: clamp(15px,2vw,20px);
+    padding-inline: clamp(11px,1.75vw,20px);
     color: white;
     font-size: clamp(10px,2vw,25px);
     height: 100%;
@@ -67,6 +69,7 @@ h1 {
 }
 h2 {
     font-size: clamp(20px,4vw,60px);
+    font-family: "Inter";
 }
 #jerry-parry {
     font-size: clamp(15px,3vw,45px);
@@ -94,4 +97,21 @@ h2 {
     width: 50%;
     border-top-right-radius: clamp(20px,2vw,40px);
     border-bottom-right-radius: clamp(20px,2vw,40px);
+}
+#catboi {
+    width: clamp(300px,50vw,500px);
+    border-radius: clamp(15px, 3vw, 30px);
+    padding: 0;
+    transition: 0.3s ease;
+    transform-origin: center;
+    filter: brightness(.95);
+}
+#catboi:hover {
+    filter: brightness(1.05);
+    transition: 0.3s ease;
+}
+#catbutt {
+    border-radius: clamp(15px, 3vw, 30px);
+    padding: 0;
+    transition: 0.1s ease-out;
 }
