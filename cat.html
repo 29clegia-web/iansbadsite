@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>Evil Site</title>
+</head>
+<body>
+    <div id="nav">
+        <div id="left">
+            <p id="title"><b>IAN CLEGG'S BAD SITE</b></p>
+        </div>
+        <div id="right">
+            <a href="index.html"><button><b>HOME</b></button></a>
+            <a href="contact.html"><button><b>CONTACT</b></button></a>
+            <a href="about.html"><button><b>ABOUT</b></button></a>
+            <a href="cat.html"><button><b>CAT</b></button></a>
+        </div>
+    </div>
+    <br><br><br><br>
+    <h1>Cat Clicker</h1><br>
+    <button id="catbutt" onclick="catClicked()"><img src="cat.webp" id="catboi"></button><br>
+    <h2 id="clicks">Clicks : </h2>
+    <script>
+        var clicks = localStorage.getItem('clicks');
+        clicks++;
+        document.getElementById("clicks").innerHTML = "Clicks : " + clicks;
+        function catClicked() {
+            document.getElementById("catbutt").style.transform = "scale(1.05)";
+            localStorage.setItem('clicks', clicks++);
+            document.getElementById("clicks").innerHTML = "Clicks : " + clicks;
+            setTimeout(function() {
+                document.getElementById("catbutt").style.transform = "scale(1)"; 
+            }, 100);
+        }
+    </script>
+</body>
+</html>
