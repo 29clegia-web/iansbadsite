@@ -24,20 +24,76 @@
     <br><br><br><br>
     <h1>Cat Clicker</h1><br>
     <button id="catbutt" onclick="catClicked()"><img src="cat.jpg" id="catboi"></button><br>
-    <h2 id="clicks">Clicks : </h2>
+    <h2 id="clicks">Clicks : </h2><br>
+    <button id="upgrade" onclick="petter()"><h4>Cat petter : <span id="pCount"></span></h4><h4><span id="pCost"></span></h4><h5>1 CPS</h5></button><br>
+    <button id="upgrade" onclick="feeder()"><h4>Cat feeder : <span id="fCount"></span></h4><h4><span id="fCost"></span></h4><h5>5 CPS</h5></button><br>
+    <button id="upgrade" onclick="sitter()"><h4>Cat sitter</h4><h5>10 CPS</h5></button><br>
+    <button id="upgrade" onclick="breeder()"><h4>Cat breeder</h4><h5>25 CPS</h5></button><br>
+    <button id="upgrade" onclick="factory()"><h4>Cat factory</h4><h5>75 CPS</h5></button><br>
     <script>
         var clicks = localStorage.getItem('clicks');
         clicks++;
-        document.getElementById("clicks").innerHTML = "Clicks : " + clicks;
+        function initLocalStorage(key, value) {
+        if (localStorage.getItem(key) === null) {
+            localStorage.setItem(key, value);
+        }
+        }
+        initLocalStorage("petterCost", 20);
+        initLocalStorage("petters", 0);
+        initLocalStorage("feederCost", 75);
+        initLocalStorage("feeders", 0);
+        var petters = localStorage.getItem("petters");
+        var feeders = localStorage.getItem("feeders");
+        var sitters = localStorage.getItem("sitters");
+        var breeders = localStorage.getItem("breeders");
+        var factories = localStorage.getItem("factories");
+        var petterCost = Number(localStorage.getItem("petterCost")) || 20;
+        var feederCost = Number(localStorage.getItem("feederCost")) || 75;
+        var sitterCost = localStorage.getItem("sitterCost");
+        var breederCost = localStorage.getItem("breederCost");
+        var factoryCost = localStorage.getItem("factoryCost");
+        document.getElementById("pCost").innerHTML = "$" + Number(petterCost.toFixed(0));
+        document.getElementById("pCount").innerHTML = petters;
+        document.getElementById("fCost").innerHTML = "$" + Number(feederCost.toFixed(0));
+        document.getElementById("fCount").innerHTML = feeders;
+        document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
         function catClicked() {
             document.getElementById("catbutt").style.transform = "scale(1.05)";
             localStorage.setItem('clicks', clicks++);
-            document.getElementById("clicks").innerHTML = "Clicks : " + clicks;
+            document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
             setTimeout(function() {
                 document.getElementById("catbutt").style.transform = "scale(1)"; 
             }, 100);
         }
+        function petter() {
+            if (clicks > petterCost) {
+                clicks -= petterCost;
+                petters++;
+                petterCost = petterCost*1.25;
+                document.getElementById("pCost").innerHTML = "$" + Number(petterCost.toFixed(0));
+                document.getElementById("pCount").innerHTML = petters;
+                localStorage.setItem("clicks", clicks);
+                localStorage.setItem("petters", petters);
+                localStorage.setItem("petterCost", petterCost);
+            }
+        }
+        function feeder() {
+            if (clicks > feederCost) {
+                clicks -= feederCost;
+                feeders++;
+                feederCost = feederCost*1.25;
+                document.getElementById("fCost").innerHTML = "$" + Number(feederCost.toFixed(0));
+                document.getElementById("fCount").innerHTML = feeders;
+                localStorage.setItem("clicks", clicks);
+                localStorage.setItem("feeders", feeders);
+                localStorage.setItem("feederCost", feederCost);
+            }
+        }
+        setInterval(function () {
+            clicks += petters*1 + feeders*5 + sitters*10 + breeders*25 + factories*75;
+            localStorage.setItem("clicks", clicks);
+            document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
+        }, 1000);
     </script>
 </body>
-
 </html>
