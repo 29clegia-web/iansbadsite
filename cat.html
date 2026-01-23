@@ -23,7 +23,7 @@
     </div>
     <br><br><br><br>
     <h1>Cat Clicker</h1>
-    <h2>Last Update : 1/22/26 1:50pm</h2><br>
+    <h2>Last Update : 1/23/26 1:37pm</h2><br>
     <button id="catbutt" onclick="catClicked()"><img src="cat.jpg" id="catboi"></button><br>
     <h2 id="clicks">Clicks : </h2>
     <h2 id="CPS">Clicks Per Second : </h2><br>
@@ -34,6 +34,8 @@
     <button id="upgrade" onclick="breeder()"><h4>Cat breeder : <span id="bCount"></span></h4><h4><span id="bCost"></span></h4><h5>100 CPS</h5></button><br>
     <button id="upgrade" onclick="meme()"><h4>Cat meme : <span id="mCount"></span></h4><h4><span id="mCost"></span></h4><h5>500 CPS</h5></button><br>
     <button id="upgrade" onclick="fat()"><h4>Fat cat : <span id="fatCount"></span></h4><h4><span id="fatCost"></span></h4><h5>2500 CPS</h5></button><br>
+    <h2>Changelog</h2>
+    <h2>1/23/26 1:37pm : Added commas / button hovers</h2>
     <script>
         var clicks = Number(localStorage.getItem('clicks')) || 0;
         clicks++;
@@ -61,16 +63,15 @@
         initLocalStorage("clickWorth", 1);
         initLocalStorage("clickWorthInc", 1);
         var clickValCount = localStorage.getItem("clickValCount");
-        var clickWorthInc = 1;
-
-        var petters = localStorage.getItem("petters");
-        var feeders = localStorage.getItem("feeders");
-        var sitters = localStorage.getItem("sitters");
-        var breeders = localStorage.getItem("breeders");
-        var memes = localStorage.getItem("memes");
-        var fats = localStorage.getItem("fats");
+        var clickWorthInc = localStorage.getItem("clickWorthInc");
+        var petters = Number(localStorage.getItem("petters"))  || 0;
+        var feeders = Number(localStorage.getItem("feeders"))  || 0;
+        var sitters = Number(localStorage.getItem("sitters"))  || 0;
+        var breeders = Number(localStorage.getItem("breeders")) || 0;
+        var memes = Number(localStorage.getItem("memes"))    || 0;
+        var fats = Number(localStorage.getItem("fats"))     || 0;
         var clickWorth = Number(localStorage.getItem("clickWorth")) || 1;
-        var clickWorthInc = Number(localStorage.getItem("clickWorthInc")) || 1;
+        var clickWorth = Number(localStorage.getItem("clickWorthInc")) || 1;
         var clickValCost = Number(localStorage.getItem("clickValCost")) || 30;
         var petterCost = Number(localStorage.getItem("petterCost")) || 50;
         var feederCost = Number(localStorage.getItem("feederCost")) || 200;
@@ -78,27 +79,27 @@
         var breederCost = Number(localStorage.getItem("breederCost")) || 8000;
         var memeCost = Number(localStorage.getItem("memeCost")) || 30000;
         var fatCost = Number(localStorage.getItem("fatCost")) || 500000;
-        document.getElementById("cValCost").innerHTML = "$" + Number(clickValCost.toFixed(0));
+        document.getElementById("cValCost").innerHTML = "$" + Math.floor(clickValCost).toLocaleString("en-US");
         document.getElementById("cValCount").innerHTML = clickValCount;
-        document.getElementById("pCost").innerHTML = "$" + Number(petterCost.toFixed(0));
+        document.getElementById("pCost").innerHTML = "$" + Math.floor(petterCost).toLocaleString("en-US");
         document.getElementById("pCount").innerHTML = petters;
-        document.getElementById("fCost").innerHTML = "$" + Number(feederCost.toFixed(0));
+        document.getElementById("fCost").innerHTML = "$" + Math.floor(feederCost).toLocaleString("en-US");
         document.getElementById("fCount").innerHTML = feeders;
-        document.getElementById("sCost").innerHTML = "$" + Number(sitterCost.toFixed(0));
+        document.getElementById("sCost").innerHTML = "$" + Math.floor(sitterCost).toLocaleString("en-US");
         document.getElementById("sCount").innerHTML = sitters;
-        document.getElementById("bCost").innerHTML = "$" + Number(breederCost.toFixed(0));
+        document.getElementById("bCost").innerHTML = "$" + Math.floor(breederCost).toLocaleString("en-US");
         document.getElementById("bCount").innerHTML = breeders;
-        document.getElementById("mCost").innerHTML = "$" + Number(memeCost.toFixed(0));
+        document.getElementById("mCost").innerHTML = "$" + Math.floor(memeCost).toLocaleString("en-US");
         document.getElementById("mCount").innerHTML = memes;
-        document.getElementById("fatCost").innerHTML = "$" + Number(fatCost.toFixed(0));
+        document.getElementById("fatCost").innerHTML = "$" + Math.floor(fatCost).toLocaleString("en-US");
         document.getElementById("fatCount").innerHTML = fats;
-        document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
-        document.getElementById("clickWorth").innerHTML = "Click worth : " + Number(clickWorth.toFixed(0));
+        document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
+        document.getElementById("clickWorth").innerHTML = "Click Worth : " + Math.floor(clickWorth).toLocaleString("en-US");
         
         function catClicked() {
             document.getElementById("catbutt").style.transform = "scale(1.05)";
             localStorage.setItem('clicks', clicks+=clickWorth);
-            document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
+            document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
             setTimeout(function() {
                 document.getElementById("catbutt").style.transform = "scale(1)"; 
             }, 100);
@@ -108,17 +109,17 @@
                 clicks -= clickValCost;
                 clickValCount++;
                 clickValCost = clickValCost*2.25;
-                clickWorthInc = clickWorthInc*1.25;
+                clickWorthInc = clickWorthInc*1.5;
                 clickWorth += clickWorthInc;
-                document.getElementById("cValCost").innerHTML = "$" + Number(clickValCost.toFixed(0));
+                document.getElementById("cValCost").innerHTML = "$" + Math.floor(clickValCost).toLocaleString("en-US");
                 document.getElementById("cValCount").innerHTML = clickValCount;
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("clickValCount", clickValCount);
                 localStorage.setItem("clickValCost", clickValCost);
                 localStorage.setItem("clickWorthInc", clickWorthInc);
                 localStorage.setItem("clickWorth", clickWorth);
-                document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
-                document.getElementById("clickWorth").innerHTML = "Click worth : " + Number(clickWorth.toFixed(0));
+                document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
+                document.getElementById("clickWorth").innerHTML = Math.floor(clickWorth).toLocaleString("en-US");
             }
         }
         function petter() {
@@ -126,12 +127,12 @@
                 clicks -= petterCost;
                 petters++;
                 petterCost = petterCost*1.15;
-                document.getElementById("pCost").innerHTML = "$" + Number(petterCost.toFixed(0));
+                document.getElementById("pCost").innerHTML = "$" + Math.floor(petterCost).toLocaleString("en-US");
                 document.getElementById("pCount").innerHTML = petters;
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("petters", petters);
                 localStorage.setItem("petterCost", petterCost);
-                document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
+                document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
             }
         }
         function feeder() {
@@ -139,12 +140,12 @@
                 clicks -= feederCost;
                 feeders++;
                 feederCost = feederCost*1.15;
-                document.getElementById("fCost").innerHTML = "$" + Number(feederCost.toFixed(0));
+                document.getElementById("fCost").innerHTML = "$" + Math.floor(feederCost).toLocaleString("en-US");
                 document.getElementById("fCount").innerHTML = feeders;
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("feeders", feeders);
                 localStorage.setItem("feederCost", feederCost);
-                document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
+                document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
             }
         }
         function sitter() {
@@ -152,12 +153,12 @@
                 clicks -= sitterCost;
                 sitters++;
                 sitterCost = sitterCost*1.15;
-                document.getElementById("sCost").innerHTML = "$" + Number(sitterCost.toFixed(0));
+                document.getElementById("sCost").innerHTML = "$" + Math.floor(sitterCost).toLocaleString("en-US");
                 document.getElementById("sCount").innerHTML = sitters;
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("sitters", sitters);
                 localStorage.setItem("sitterCost", sitterCost);
-                document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
+                document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
             }
         }
         function breeder() {
@@ -165,12 +166,12 @@
                 clicks -= breederCost;
                 breeders++;
                 breederCost = breederCost*1.15;
-                document.getElementById("bCost").innerHTML = "$" + Number(breederCost.toFixed(0));
+                document.getElementById("bCost").innerHTML = "$" + Math.floor(breederCost).toLocaleString("en-US");
                 document.getElementById("bCount").innerHTML = breeders;
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("breeders", breeders);
                 localStorage.setItem("breederCost", breederCost);
-                document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
+                document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
             }
         }
         function meme() {
@@ -178,12 +179,12 @@
                 clicks -= memeCost;
                 memes++;
                 memeCost = memeCost*1.15;
-                document.getElementById("mCost").innerHTML = "$" + Number(memeCost.toFixed(0));
+                document.getElementById("mCost").innerHTML = "$" + Math.floor(memeCost).toLocaleString("en-US");
                 document.getElementById("mCount").innerHTML = memes;
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("memes", memes);
                 localStorage.setItem("memeCost", memeCost);
-                document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
+                document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
             }
         }
         function fat() {
@@ -191,23 +192,21 @@
                 clicks -= fatCost;
                 fats++;
                 fatCost = fatCost*1.15;
-                document.getElementById("fatCost").innerHTML = "$" + Number(fatCost.toFixed(0));
+                document.getElementById("fatCost").innerHTML = "$" + Math.floor(fatCost).toLocaleString("en-US");
                 document.getElementById("fatCount").innerHTML = fats;
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("fats", fats);
                 localStorage.setItem("fatCost", fatCost);
-                document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
+                document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
             }
         }
         setInterval(function () {
             clicks += petters*1 + feeders*5 + sitters*20 + breeders*100 + memes*500 + fats*2500;
             cliksPerSec = petters*1 + feeders*5 + sitters*20 + breeders*100 + memes*500 + fats*2500;
             localStorage.setItem("clicks", clicks);
-            document.getElementById("clicks").innerHTML = "Clicks : " + Number(clicks.toFixed(0));
-            document.getElementById("CPS").innerHTML = "Clicks Per Second : " + Number(cliksPerSec.toFixed(0));
+            document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
+            document.getElementById("CPS").innerHTML = "Clicks Per Second : " + Math.floor(cliksPerSec).toLocaleString("en-US");
         }, 1000);
     </script>
 </body>
 </html>
-
-
