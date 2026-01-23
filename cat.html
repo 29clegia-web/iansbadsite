@@ -27,7 +27,7 @@
     <button id="catbutt" onclick="catClicked()"><img src="cat.jpg" id="catboi"></button><br>
     <h2 id="clicks">Clicks : </h2>
     <h2 id="CPS">Clicks Per Second : </h2><br>
-    <button id="upgrade" onclick="clickVal()"><h4>1.25x Click value : <span id="cValCount"></span></h4><h4><span id="cValCost"></span></h4><h5><span id="clickWorth"></span></h5></button><br>
+    <button id="upgrade" onclick="clickVal()"><h4>1.5x Click value : <span id="cValCount"></span></h4><h4><span id="cValCost"></span></h4><h5><span id="clickWorth"></span></h5></button><br>
     <button id="upgrade" onclick="petter()"><h4>Cat petter : <span id="pCount"></span></h4><h4><span id="pCost"></span></h4><h5>1 CPS</h5></button><br>
     <button id="upgrade" onclick="feeder()"><h4>Cat feeder : <span id="fCount"></span></h4><h4><span id="fCost"></span></h4><h5>5 CPS</h5></button><br>
     <button id="upgrade" onclick="sitter()"><h4>Cat sitter : <span id="sCount"></span></h4><h4><span id="sCost"></span></h4><h5>20 CPS</h5></button><br>
@@ -64,14 +64,14 @@
         initLocalStorage("clickWorthInc", 1);
         var clickValCount = localStorage.getItem("clickValCount");
         var clickWorthInc = localStorage.getItem("clickWorthInc");
-        var petters = Number(localStorage.getItem("petters"))  || 0;
-        var feeders = Number(localStorage.getItem("feeders"))  || 0;
-        var sitters = Number(localStorage.getItem("sitters"))  || 0;
+        var petters = Number(localStorage.getItem("petters")) || 0;
+        var feeders = Number(localStorage.getItem("feeders")) || 0;
+        var sitters = Number(localStorage.getItem("sitters")) || 0;
         var breeders = Number(localStorage.getItem("breeders")) || 0;
-        var memes = Number(localStorage.getItem("memes"))    || 0;
-        var fats = Number(localStorage.getItem("fats"))     || 0;
+        var memes = Number(localStorage.getItem("memes")) || 0;
+        var fats = Number(localStorage.getItem("fats")) || 0;
         var clickWorth = Number(localStorage.getItem("clickWorth")) || 1;
-        var clickWorth = Number(localStorage.getItem("clickWorthInc")) || 1;
+        var clickWorthInc = Number(localStorage.getItem("clickWorthInc")) || 1;
         var clickValCost = Number(localStorage.getItem("clickValCost")) || 30;
         var petterCost = Number(localStorage.getItem("petterCost")) || 50;
         var feederCost = Number(localStorage.getItem("feederCost")) || 200;
@@ -119,7 +119,7 @@
                 localStorage.setItem("clickWorthInc", clickWorthInc);
                 localStorage.setItem("clickWorth", clickWorth);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                document.getElementById("clickWorth").innerHTML = Math.floor(clickWorth).toLocaleString("en-US");
+                document.getElementById("clickWorth").innerHTML = "Click Worth : " + Math.floor(clickWorth).toLocaleString("en-US");
             }
         }
         function petter() {
