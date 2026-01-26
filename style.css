@@ -226,10 +226,37 @@ h2 {
     flex-direction: column;
 }
 #clicker {
-    flex: 0 0 70%;
+    flex: 0 0 58%;
     overflow: hidden;
     display: flex;
     width: 100%;
+}
+#rebirth {
+    flex: 0 0 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(17px,2vw,30px);
+    width: 100%;
+    font-family: "Inter";
+    font-weight: 600;
+    background: repeating-linear-gradient(
+        45deg,
+        rgb(255, 215, 163),
+        rgb(255, 215, 163) 50px,
+        rgb(255, 205, 153) 50px,
+        rgb(255, 205, 153) 100px
+    );
+    border-top: 10px solid black;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    transition: 0.3s ease;
+}
+#rebirth:hover {
+    font-size: clamp(20px,2.2vw,33px);
+    transition: 0.3s ease;
+    cursor: pointer;
 }
 #gamble-sec {
     width: 33.3333%;
@@ -404,4 +431,62 @@ h2 {
     width: 33.3333%;
     overflow-y: auto;
     height: 100%;
+}
+#usure {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -60%);
+    width: 50%;
+    height: 50%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgb(153, 255, 170),
+        rgb(153, 255, 170) 50px,
+        rgb(153, 245, 160) 50px,
+        rgb(153, 245, 160) 100px
+    );
+    z-index: 100000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: clamp(15px, 3vw, 60px);
+    border: clamp(7px, 2vw, 15px) solid black;
+    border-radius: clamp(15px, 2.5vw, 30px);
+    opacity: 0;
+    transition: 0.5s ease;
+    pointer-events: none;
+}
+#usure > h2 {
+    font-size: clamp(20px,2.5vw,40px);
+    line-height: 1;
+    text-align: center;
+}
+#usure > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    z-index: 100000;
+}
+#opt {
+    width: 25%;
+    height: clamp(25px, 6vh, 60px);
+    margin-inline: clamp(15px, 2vw, 40px);
+    font-weight: 650;
+    font-family: "Inter";
+    border: clamp(2px,1vw,5px) solid black;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    transform-origin: center;
+    transform: scale(1);
+    filter: brightness(1);
+    background-color: rgb(233, 255, 236);
+}
+#opt:hover {
+    transition: 0.3s ease;
+    transform: scale(1.08);
+    filter: brightness(1.2) !important;
+    cursor: pointer;
 }
