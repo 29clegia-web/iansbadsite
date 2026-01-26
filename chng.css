@@ -1,0 +1,105 @@
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: repeating-linear-gradient(
+        45deg,
+        rgb(200, 215, 255),
+        rgb(200, 215, 255) 50px,
+        rgb(200, 205, 245) 50px,
+        rgb(200, 205, 245) 100px
+    );
+    user-select: none;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: "Inter";
+}
+#nav {
+    position: sticky;    
+    top: 0;
+    z-index: 1000;
+    left: 0;
+    width: 100vw;
+    height: clamp(65px,8vh,90px);
+    background-color: black;
+    display: flex;
+    flex-direction: inline;
+    z-index: 100;
+    box-shadow: 0px 0px 20px black;
+    font-family: "Inter";
+}
+#left {
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+#title {
+    color: white;
+    font-family: "Inter";
+    padding-inline: 20px;
+    font-size: clamp(20px,3vw,30px);
+    top: 0;
+    user-select: none;
+    cursor: default;
+}
+#right {
+    top: 0;
+    position: absolute;
+    height: 70px;
+    right: 0;
+    user-select: none;
+}
+#right > a > button {
+    top: 0;
+    text-align: center;
+    padding-inline: clamp(11px,1.75vw,20px);
+    color: white;
+    font-size: clamp(10px,2vw,25px);
+    height: clamp(65px,8vh,90px);
+    background-color: transparent;
+    border: none;
+    font-family: "Inter";
+    transition: 0.3s ease;
+    background-color: black;
+    border: none;
+    color: white;
+}
+#right > a > button:hover {
+    cursor: pointer;
+    background-color: rgb(48, 48, 48);
+    transition: 0.3s ease;
+}
+h1 {
+    font-family: "Inter";
+    font-size: clamp(30px,3.75vw,75px);
+}
+h2 {
+    font-family: "Inter";
+    font-size: clamp(25px,2.5vw,45px);
+}
+h3 {
+    font-family: "Inter";
+    font-size: clamp(20px,1.8vw,30px);
+}
+p {
+    font-family: "Inter";
+    font-size: clamp(15px,1.5vw,20px);
+}
+li {
+    font-family: "Inter";
+    font-size: clamp(15px,1.5vw,20px);
+}
+img {
+    width: clamp(500px,75vw,1000px);
+    border-radius: clamp(10px, 2.5vw, 20px);
+    border: clamp(5px, 1vw, 10px) solid black;
+}
+#spacer {
+    height: clamp(10px, 2vh, 20px);
+}
+#smol-spacer {
+    line-height: .3;
+}
