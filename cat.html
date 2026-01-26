@@ -13,13 +13,13 @@
 <body>
     <div id="nav">
         <div id="left">
-            <p id="title"><b>IAN CLEGG'S BAD SITE</b></p>
+            <p id="title"><b>CAT CLICKER</b></p>
         </div>
         <div id="right">
             <a href="index.html"><button><b>HOME</b></button></a>
-            <a href="contact.html"><button><b>CONTACT</b></button></a>
-            <a href="about.html"><button><b>ABOUT</b></button></a>
             <a href="cat.html"><button><b>CAT</b></button></a>
+            <a href="about.html"><button><b>CHANGELOG</b></button></a>
+            <a href="contact.html"><button><b>CONTACT</b></button></a>
         </div>
     </div>
     <div id="region">
@@ -32,6 +32,7 @@
             <div id="clicker">
                 <button id="catbutt" onclick="catClicked()"><img src="cat.jpg" id="catboi" draggable="false"></button><p id="spacer"></p>
             </div>
+            <button id="rebirth" onclick="popup()">Rebirth #<span id="rebirthCount"></span>&nbsp;for $5,000,000,000</button><p></p>
         </div>
         <div id="gamble-sec"><p id="smol-spacer"></p>
             <h1 id="gamble-head">Gamble</h1>
@@ -66,6 +67,14 @@
             <button id="upgrade" onclick="nation()"><h4>Cat nation : <span id="nCount"></span></h4><h4><span id="nCost"></span></h4><h5>50,000 CPS</h5></button>
             <button id="upgrade" onclick="overlord()"><h4>Cat overlord : <span id="oCount"></span></h4><h4><span id="oCost"></span></h4><h5>200,000 CPS</h5></button>
             <button id="upgrade" class="lupgrade" onclick="planet()"><h4>Cat planet : <span id="plCount"></span></h4><h4><span id="plCost"></span></h4><h5>1,000,000 CPS</h5></button>
+        </div>
+    </div>
+    <div id="usure">
+        <h1>Are you sure?</h1>
+        <h2>Doing this will restart all of your progress in exchange for an infinite +5% CPS boost.</h2><p id="smol-spacer"></p>
+        <div>
+            <button id="opt" onclick="hidepopup()">NO WAY!</button>
+            <button id="opt" onclick="rebirth()">LET'S DO IT</button>
         </div>
     </div>
     
@@ -107,10 +116,12 @@
         initLocalStorage("clickValCount", 0);
         initLocalStorage("clickWorth", 1);
         initLocalStorage("clickWorthInc", 1);
+        initLocalStorage("rebirths", 0);
         var clicks = Number(localStorage.getItem('clicks')) || 0;
         clicks++;
         clicks--;
         localStorage.setItem('clicks', clicks);
+        var rebirths = Number(localStorage.getItem("rebirths")) || 0;
         var clickValCount = Number(localStorage.getItem("clickValCount")) || 0;
         var petters = Number(localStorage.getItem("petters")) || 0;
         var feeders = Number(localStorage.getItem("feeders")) || 0;
@@ -165,9 +176,10 @@
         document.getElementById("oCount").innerHTML = overlords;
         document.getElementById("plCost").innerHTML = "$" + Math.floor(planetCost).toLocaleString("en-US");
         document.getElementById("plCount").innerHTML = planets;
+        document.getElementById("rebirthCount").innerHTML = rebirths + 1;
         document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
         document.getElementById("clickWorth").innerHTML = "Click Worth : " + Math.floor(clickWorth).toLocaleString("en-US");
-        cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+        cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
         document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
         document.getElementById("slide-val").innerHTML = (`${wager.value}%`);
         document.getElementById("slide-cost").innerHTML = "$" + Math.floor(clicks*(wager.value/100)).toLocaleString("en-US");
@@ -201,7 +213,7 @@
                 localStorage.setItem("clickWorth", clickWorth);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 document.getElementById("clickWorth").innerHTML = "Click Worth : " + Math.floor(clickWorth).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -216,7 +228,7 @@
                 localStorage.setItem("petters", petters);
                 localStorage.setItem("petterCost", petterCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -231,7 +243,7 @@
                 localStorage.setItem("feeders", feeders);
                 localStorage.setItem("feederCost", feederCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -246,7 +258,7 @@
                 localStorage.setItem("sitters", sitters);
                 localStorage.setItem("sitterCost", sitterCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -261,7 +273,7 @@
                 localStorage.setItem("groomers", groomers);
                 localStorage.setItem("groomerCost", groomerCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -276,7 +288,7 @@
                 localStorage.setItem("breeders", breeders);
                 localStorage.setItem("breederCost", breederCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -291,7 +303,7 @@
                 localStorage.setItem("trainers", trainers);
                 localStorage.setItem("trainerCost", trainerCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -306,7 +318,7 @@
                 localStorage.setItem("memes", memes);
                 localStorage.setItem("memeCost", memeCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -321,7 +333,7 @@
                 localStorage.setItem("fats", fats);
                 localStorage.setItem("fatCost", fatCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -336,7 +348,7 @@
                 localStorage.setItem("scientists", scientists);
                 localStorage.setItem("scientistCost", scientistCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -351,7 +363,7 @@
                 localStorage.setItem("nations", nations);
                 localStorage.setItem("nationCost", nationCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -366,7 +378,7 @@
                 localStorage.setItem("overlords", overlords);
                 localStorage.setItem("overlordCost", overlordCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
@@ -381,25 +393,29 @@
                 localStorage.setItem("planets", planets);
                 localStorage.setItem("planetCost", planetCost);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
-                cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+                cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             }
         }
         setInterval(function () {
-            clicks += petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
-            cliksPerSec = petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000;
+            clicks += (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
+            cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
             localStorage.setItem("clicks", clicks);
             document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
             document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
             document.getElementById("slide-val").innerHTML = (`${wager.value}%`);
+            saveGame();
             if (!rolling) {
                 document.getElementById("slide-cost").innerHTML = "$" + Math.floor(clicks*(wager.value/100)).toLocaleString("en-US");
             }
         }, 1000);
-
+        
         // LETS FEGGIN GO CLAUDE HELLS TO THE YEAH
         window.addEventListener('beforeunload', function() {
-            // Save one final time before closing
+            saveGame();
+        });
+        // STILL FEGGIN LOVE YOU FOR TS CLAUDE
+        function saveGame() {
             localStorage.setItem("clicks", clicks);
             localStorage.setItem("petters", petters);
             localStorage.setItem("feeders", feeders);
@@ -413,7 +429,6 @@
             localStorage.setItem("nations", nations);
             localStorage.setItem("overlords", overlords);
             localStorage.setItem("planets", planets);
-            // Save all the costs too
             localStorage.setItem("petterCost", petterCost);
             localStorage.setItem("feederCost", feederCost);
             localStorage.setItem("sitterCost", sitterCost);
@@ -430,7 +445,9 @@
             localStorage.setItem("clickValCount", clickValCount);
             localStorage.setItem("clickWorth", clickWorth);
             localStorage.setItem("clickWorthInc", clickWorthInc);
-        });
+            localStorage.setItem("rebirths", rebirths);
+            document.getElementById("rebirthCount").innerHTML = rebirths + 1;
+        }
 
         document.getElementById("wager").addEventListener("input", () => {
            document.getElementById("slide-val").innerHTML = (`${wager.value}%`);
@@ -506,6 +523,55 @@
                 die.src = "die" + dieamt + ".png";
                 die.style.opacity = "1";
             }, 100)
+        }
+
+        function popup() {
+            if (clicks >= 5000000000) {
+                document.getElementById("usure").style.opacity = 1;
+                document.getElementById("usure").style.pointerEvents = "auto";
+            }
+        }
+        function hidepopup() {
+            document.getElementById("usure").style.opacity = 0;
+            document.getElementById("usure").style.pointerEvents = "none";
+        }
+        function rebirth() {
+            document.getElementById("usure").style.opacity = 0;
+            document.getElementById("usure").style.pointerEvents = "none";
+            clicks = 0;
+            petters = 0;
+            feeders = 0;
+            sitters = 0;
+            groomers = 0;
+            breeders = 0;
+            trainers = 0;
+            memes = 0;
+            fats = 0;
+            scientists = 0;
+            nations = 0;
+            overlords = 0;
+            planets = 0;
+            clickValCost = 30;
+            clickValCount = 0;
+            clickWorth = 1;
+            clickWorthInc = 1;
+            petterCost = 50;
+            feederCost = 200;
+            sitterCost = 1500;
+            groomerCost = 5000;
+            breederCost = 25000;
+            trainerCost = 100000;
+            memeCost = 750000;
+            fatCost = 3000000;
+            scientistCost = 15000000;
+            nationCost = 75000000;
+            overlordCost = 300000000;
+            planetCost = 1500000000;
+            rebirths++;
+            localStorage.setItem("rebirths", rebirths);
+            document.getElementById("rebirthCount").innerHTML = rebirths + 1;
+            saveGame();
+            location.reload();
         }
     </script>
 </body>
