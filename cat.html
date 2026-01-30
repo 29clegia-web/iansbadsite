@@ -82,6 +82,34 @@
     <h2>1/23/26 1:37pm : Added commas / button hovers</h2><p id="spacer">&nbsp;</p>
     -->
     <script>
+        const channel = new BroadcastChannel("cat-clicker-sync");
+        let isDuplicate = true;
+
+        // Ask if another tab exists
+        channel.postMessage({ type: "ping" });
+
+        // If we hear back, another tab is alive
+        channel.onmessage = (e) => {
+            if (e.data.type === "pong") {
+                // DUPLICATED TAB → punish
+                localStorage.setItem("clicks", 0);
+                alert("Tab duplication detected. Clicks reset.");
+                location.reload();
+            }
+        };
+
+        // Respond to pings from other tabs
+        channel.addEventListener("message", (e) => {
+            if (e.data.type === "ping") {
+                channel.postMessage({ type: "pong" });
+            }
+        });
+
+        // After a short delay, assume safe (reload)
+        setTimeout(() => {
+            isDuplicate = false;
+        }, 200);
+
         const TAB_ID = crypto.randomUUID();
         const TAB_KEY = "activeCatClickerTab";
 
