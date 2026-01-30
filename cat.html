@@ -82,6 +82,44 @@
     <h2>1/23/26 1:37pm : Added commas / button hovers</h2><p id="spacer">&nbsp;</p>
     -->
     <script>
+        const TAB_ID = crypto.randomUUID();
+        const TAB_KEY = "activeCatClickerTab";
+
+        // If another tab is already active → reset
+        const activeTab = localStorage.getItem(TAB_KEY);
+
+        if (activeTab && activeTab !== TAB_ID) {
+            localStorage.clear();
+            alert("Multiple tabs detected. Progress reset.");
+            location.reload();
+        }
+
+        // Claim ownership
+        localStorage.setItem(TAB_KEY, TAB_ID);
+
+        // Release lock when tab closes
+        window.addEventListener("beforeunload", () => {
+            if (localStorage.getItem(TAB_KEY) === TAB_ID) {
+                localStorage.removeItem(TAB_KEY);
+            }
+        });
+
+        // ----- TAB DUPE PUNISHMENT SYSTEM -----
+        if (!sessionStorage.getItem("sessionId")) {
+            sessionStorage.setItem("sessionId", crypto.randomUUID());
+        }
+        const SESSION_ID = sessionStorage.getItem("sessionId");
+
+        const lastSession = localStorage.getItem("lastSession");
+
+        if (lastSession && lastSession !== SESSION_ID) {
+            // Punish duplication
+            localStorage.setItem("clicks", 0);
+        }
+
+        localStorage.setItem("lastSession", SESSION_ID);
+
+
         function initLocalStorage(key, value) {
         if (localStorage.getItem(key) === null) {
             localStorage.setItem(key, value);
@@ -579,22 +617,6 @@
             saveGame();
             location.reload();
         }
-        const TAB_ID = Date.now() + "-" + Math.random();
-        const TAB_KEY = "activeTabId";
-
-        // Claim tab ownership
-        localStorage.setItem(TAB_KEY, TAB_ID);
-
-        // Check every 500ms if this tab is still valid
-        setInterval(() => {
-            if (localStorage.getItem(TAB_KEY) !== TAB_ID) {
-                document.body.innerHTML = `
-                    <h1>Another tab is open.</h1>
-                    <p>Please close other tabs to continue.</p>
-                `;
-                throw new Error("Multiple tabs detected");
-            }
-        }, 500);
     </script>
 </body>
 </html>
