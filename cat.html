@@ -82,7 +82,12 @@
     <h2>1/23/26 1:37pm : Added commas / button hovers</h2><p id="spacer">&nbsp;</p>
     -->
     <script>
-        initLocalStorage("clicks", 0)
+        function initLocalStorage(key, defaultValue) {
+            if (localStorage.getItem(key) === null) {
+                localStorage.setItem(key, defaultValue);
+            }
+        }
+        initLocalStorage("clicks", 0);
         initLocalStorage("petterCost", 50);
         initLocalStorage("petters", 0);
         initLocalStorage("feederCost", 200);
@@ -112,6 +117,9 @@
         initLocalStorage("clickWorth", 1);
         initLocalStorage("clickWorthInc", 1);
         initLocalStorage("rebirths", 0);
+
+        initLocalStorage("upgradesBought", 0);
+
         var clicks = Number(localStorage.getItem('clicks')) || 0;
         clicks++;
         clicks--;
@@ -145,6 +153,9 @@
         var nationCost = Number(localStorage.getItem("nationCost")) || 75000000;
         var overlordCost = Number(localStorage.getItem("overlordCost")) || 300000000;
         var planetCost = Number(localStorage.getItem("planetCost")) || 1500000000;
+        
+        var upgradesBought = Number(localStorage.getItem("upgradesBought")) || 0;
+
         document.getElementById("cValCost").innerHTML = "$" + Math.floor(clickValCost).toLocaleString("en-US");
         document.getElementById("cValCount").innerHTML = clickValCount;
         document.getElementById("pCost").innerHTML = "$" + Math.floor(petterCost).toLocaleString("en-US");
@@ -201,6 +212,7 @@
         }
         function clickVal() {
             if (clicks >= clickValCost) {
+                upgradesBought++;
                 clicks -= clickValCost;
                 clickValCount++;
                 clickValCost = clickValCost*2.25;
@@ -213,6 +225,7 @@
                 localStorage.setItem("clickValCost", clickValCost);
                 localStorage.setItem("clickWorthInc", clickWorthInc);
                 localStorage.setItem("clickWorth", clickWorth);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 document.getElementById("clickWorth").innerHTML = "Click Worth : " + Math.floor(clickWorth).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
@@ -221,6 +234,7 @@
         }
         function petter() {
             if (clicks >= petterCost) {
+                upgradesBought++;
                 clicks -= petterCost;
                 petters++;
                 petterCost = petterCost*1.15;
@@ -229,6 +243,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("petters", petters);
                 localStorage.setItem("petterCost", petterCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -236,6 +251,7 @@
         }
         function feeder() {
             if (clicks >= feederCost) {
+                upgradesBought++;
                 clicks -= feederCost;
                 feeders++;
                 feederCost = feederCost*1.15;
@@ -244,6 +260,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("feeders", feeders);
                 localStorage.setItem("feederCost", feederCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -251,6 +268,7 @@
         }
         function sitter() {
             if (clicks >= sitterCost) {
+                upgradesBought++;
                 clicks -= sitterCost;
                 sitters++;
                 sitterCost = sitterCost*1.15;
@@ -259,6 +277,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("sitters", sitters);
                 localStorage.setItem("sitterCost", sitterCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -266,6 +285,7 @@
         }
         function groomer() {
             if (clicks >= groomerCost) {
+                upgradesBought++;
                 clicks -= groomerCost;
                 groomers++;
                 groomerCost = groomerCost*1.15;
@@ -274,6 +294,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("groomers", groomers);
                 localStorage.setItem("groomerCost", groomerCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -281,6 +302,7 @@
         }
         function breeder() {
             if (clicks >= breederCost) {
+                upgradesBought++;
                 clicks -= breederCost;
                 breeders++;
                 breederCost = breederCost*1.15;
@@ -289,6 +311,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("breeders", breeders);
                 localStorage.setItem("breederCost", breederCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -296,6 +319,7 @@
         }
         function trainer() {
             if (clicks >= trainerCost) {
+                upgradesBought++;
                 clicks -= trainerCost;
                 trainers++;
                 trainerCost = trainerCost*1.15;
@@ -304,6 +328,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("trainers", trainers);
                 localStorage.setItem("trainerCost", trainerCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -311,6 +336,7 @@
         }
         function meme() {
             if (clicks >= memeCost) {
+                upgradesBought++;
                 clicks -= memeCost;
                 memes++;
                 memeCost = memeCost*1.15;
@@ -319,6 +345,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("memes", memes);
                 localStorage.setItem("memeCost", memeCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -326,6 +353,7 @@
         }
         function fat() {
             if (clicks >= fatCost) {
+                upgradesBought++;
                 clicks -= fatCost;
                 fats++;
                 fatCost = fatCost*1.15;
@@ -334,6 +362,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("fats", fats);
                 localStorage.setItem("fatCost", fatCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -341,6 +370,7 @@
         }
         function scientist() {
             if (clicks >= scientistCost) {
+                upgradesBought++;
                 clicks -= scientistCost;
                 scientists++;
                 scientistCost = scientistCost*1.15;
@@ -349,6 +379,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("scientists", scientists);
                 localStorage.setItem("scientistCost", scientistCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -356,6 +387,7 @@
         }
         function nation() {
             if (clicks >= nationCost) {
+                upgradesBought++;
                 clicks -= nationCost;
                 nations++;
                 nationCost = nationCost*1.15;
@@ -364,6 +396,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("nations", nations);
                 localStorage.setItem("nationCost", nationCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -371,6 +404,7 @@
         }
         function overlord() {
             if (clicks >= overlordCost) {
+                upgradesBought++;
                 clicks -= overlordCost;
                 overlords++;
                 overlordCost = overlordCost*1.15;
@@ -379,6 +413,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("overlords", overlords);
                 localStorage.setItem("overlordCost", overlordCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -386,6 +421,7 @@
         }
         function planet() {
             if (clicks >= planetCost) {
+                upgradesBought++;
                 clicks -= planetCost;
                 planets++;
                 planetCost = planetCost*1.15;
@@ -394,6 +430,7 @@
                 localStorage.setItem("clicks", clicks);
                 localStorage.setItem("planets", planets);
                 localStorage.setItem("planetCost", planetCost);
+                localStorage.setItem("upgradesBought",upgradesBought);
                 document.getElementById("clicks").innerHTML = "Clicks : " + Math.floor(clicks).toLocaleString("en-US");
                 cliksPerSec = (petters*1 + feeders*3 + sitters*12 + groomers*35 + breeders*100 + trainers*300 + memes*1500 + fats*4000 + scientists*15000 + nations*50000 + overlords*200000 + planets*1000000) * ((rebirths*0.05) + 1);
                 document.getElementById("CPS").innerHTML = "CPS : " + Math.floor(cliksPerSec).toLocaleString("en-US");
@@ -577,4 +614,5 @@
     </script>
 </body>
 </html>
+
 
